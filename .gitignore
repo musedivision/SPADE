@@ -4,4 +4,12 @@ results/
 *.tar.gz
 *.zip
 *.pkl
+*.pickle
 *.pyc
+*.pt
+.DS_Store
+infer_images/**
+__venv__/
+__pycache__/
+models/networks/Synchronized-BatchNorm-PyTorch/
+models/networks/sync_batchnorm/

@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+message Labelmapbuffer {
+  uint32 height = 3;
+  uint32 width = 2;
+  repeated uint32 pixel = 1;
+}
+
+message GeneratedImageResponse {
+  repeated uint32 data = 4;
+}
