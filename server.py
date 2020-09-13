@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, Response
 import labelMap_pb2 
 from os.path import join
 import numpy as np
@@ -83,14 +83,19 @@ def receiveImage():
 
     #print('genbuffer: ',gen_img_response)
 
-    return gen_img_response.SerializeToString()
-
-@app.after_request
-def add_header(response):
-    response.headers['Content-Type'] = 'application/protobuf'
-    return response
+    return Response(gen_img_response.SerializeToString(), 'application/protobuf')
 
 
+
+
+#@app.after_request
+#def add_header(response):
+#    response.headers['Content-Type'] = 'application/protobuf'
+#    return response
+
+@app.route("/status")
+def status():
+    return 'muse server running'
 
 # Get Speakers speaking at the conference. Loop through the predefinied array of contact dictionary, and create a Contact object, adding it to an array and serializing our Speakers object.
 # @app.route("/speakers")
@@ -99,4 +104,4 @@ def add_header(response):
 #     return speakers.SerializeToString()
 
 if __name__ == "__main__":
-    app.run(host= '0.0.0.0')
+    app.run(host='0.0.0.0', port=8888)

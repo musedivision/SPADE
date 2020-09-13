@@ -20,6 +20,8 @@ class Muse():
     def __init__(self):
         self.model = Pix2PixModel(opt)
         self.model.eval()
+        torch.cuda.set_device(3)
+        self.cuda = torch.cuda.is_available()
 
     def post_process(self, img):
         img = img.detach().cpu().float().numpy().squeeze()
@@ -32,6 +34,8 @@ class Muse():
 #         transform_label = get_transform(opt, params, method=Image.NEAREST, normalize=False)
 #         label_tensor = transform_label(label) * 255.0
         label_tensor = torch.FloatTensor(label)[None]
+        if self.cuda:
+            label_tensor.cuda()
         label_tensor[label_tensor == 255] = opt.label_nc  # 'unknown' is opt.label_nc
 
         # create one-hot label map
