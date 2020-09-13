@@ -13,7 +13,7 @@ from data.base_dataset import BaseDataset, get_params, get_transform
 import numpy as np
 from PIL import Image
 
-with open('opts.pkl', 'rb') as f:
+with open('opts.pkl.config', 'rb') as f:
     opt = pickle.load(f)
 
 class Muse():
